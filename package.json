@@ -1,0 +1,40 @@
+{
+  "name": "@google-cloud/precise-date",
+  "version": "0.0.0",
+  "description": "",
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
+  "repository": "googleapis/nodejs-precise-date",
+  "scripts": {
+    "test": "nyc mocha build/test",
+    "lint": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint",
+    "docs": "echo no docs 👻",
+    "presystem-test": "npm run compile",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "system-test": "mocha build/system-test"
+  },
+  "keywords": [],
+  "files": [
+    "build/src",
+    "!build/src/**/*.map"
+  ],
+  "author": "Google Inc.",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/mocha": "^5.2.4",
+    "@types/node": "^10.5.2",
+    "codecov": "^3.0.4",
+    "gts": "^0.9.0",
+    "intelli-espower-loader": "^1.0.1",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.0",
+    "source-map-support": "^0.5.6",
+    "typescript": "^3.0.0"
+  }
+}
