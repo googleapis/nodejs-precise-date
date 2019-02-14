@@ -228,7 +228,7 @@ export class PreciseDate extends Date {
   /**
    * Sets the nanoseconds for a specified date according to universal time.
    *
-   * @param {number} nanoseconds A number representing the microseconds.
+   * @param {number} nanoseconds A number representing the nanoseconds.
    * @returns {string} Returns a string representing the nanoseconds in the
    *     specified date according to universal time.
    *
@@ -300,6 +300,7 @@ export class PreciseDate extends Date {
    * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/setTime|Date#setTime}
    *
    * @param {number} time Value representing the number of milliseconds since
+   *     January 1, 1970, 00:00:00 UTC.
    * @returns {string} The number of milliseconds between January 1, 1970,
    *     00:00:00 UTC and the updated date (effectively, the value of the
    *     argument).
