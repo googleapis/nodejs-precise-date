@@ -15,6 +15,7 @@
  */
 
 import * as assert from 'assert';
+import * as Long from 'long';
 import * as sinon from 'sinon';
 
 import {DateTuple, PreciseDate} from '../src';
@@ -386,6 +387,13 @@ describe('PreciseDate', () => {
       const struct = {seconds: SECS, nanos: NANOS};
       const timestamp = PreciseDate.parseFull(struct);
       assert.strictEqual(timestamp, TIME_STRING);
+    });
+
+    it('should parse a protobuf Timestamp', () => {
+      const expectedTimestamp = `${SECS}000000000`;
+      const seconds = Long.fromNumber(SECS);
+      const timestamp = PreciseDate.parseFull({seconds});
+      assert.strictEqual(timestamp, expectedTimestamp);
     });
 
     it('should parse a date tuples', () => {
