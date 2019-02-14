@@ -192,7 +192,7 @@ export class PreciseDate extends Date {
     return this._nanos;
   }
   /**
-   * Sets the milliseconds for a specified date according to universal time.
+   * Sets the microseconds for a specified date according to universal time.
    *
    * @param {number} microseconds A number representing the microseconds.
    * @returns {string} Returns a string representing the nanoseconds in the
@@ -468,6 +468,8 @@ export class PreciseDate extends Date {
    * @returns {bigint}
    *
    * @example
+   * const time = PreciseDate.fullUTC(2019, 1, 8, 10, 34, 29, 481, 145, 231);
+   * console.log(time); // expected output: 1549622069481145231n
    */
   static fullUTC(...args: number[]): bigint {
     if (typeof BigInt !== 'function') {
@@ -487,6 +489,8 @@ export class PreciseDate extends Date {
    * @returns {string}
    *
    * @example
+   * const time = PreciseDate.fullUTCString(2019, 1, 8, 10, 34, 29, 481, 145,
+   * 231); console.log(time); // expected output: '1549622069481145231'
    */
   static fullUTCString(...args: number[]): string {
     const milliseconds = Date.UTC(...args.slice(0, 7) as DateFields);
