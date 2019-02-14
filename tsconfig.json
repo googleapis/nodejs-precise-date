@@ -3,6 +3,10 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",
+    "lib": [
+      "es2016",
+      "esnext.bigint"
+    ]
   },
   "include": [
     "src/*.ts",
