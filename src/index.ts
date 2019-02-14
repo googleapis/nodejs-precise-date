@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-import * as Long from 'long';
-import {common as protobuf} from 'protobufjs';
-
 const FULL_ISO_REG = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d{4,9}Z/;
 const NO_BIG_INT =
     'BigInt only available in Node >= v10.7. Consider using getFullTimeString instead.';
@@ -30,6 +27,15 @@ export interface DateStruct {
 
 // https://github.com/Microsoft/TypeScript/issues/27920
 type DateFields = [number, number, number, number, number, number, number];
+
+interface Long {
+  toNumber(): number;
+}
+
+interface ProtobufDate {
+  seconds?: number|string|Long;
+  nanos?: number|string;
+}
 
 enum Sign {
   NEGATIVE = -1,
@@ -96,12 +102,12 @@ export class PreciseDate extends Date {
   private _micros = 0;
   private _nanos = 0;
   constructor(time?: number|Date);
-  constructor(preciseTime: string|bigint|DateTuple|protobuf.ITimestamp);
+  constructor(preciseTime: string|bigint|DateTuple|ProtobufDate);
   constructor(
       year: number, month?: number, date?: number, hours?: number,
       minutes?: number, seconds?: number, milliseconds?: number,
       microseconds?: number, nanoseconds?: number);
-  constructor(time?: number|string|bigint|Date|DateTuple|protobuf.ITimestamp) {
+  constructor(time?: number|string|bigint|Date|DateTuple|ProtobufDate) {
     super();
 
     if (time && typeof time !== 'number' && !(time instanceof Date)) {
@@ -433,7 +439,7 @@ export class PreciseDate extends Date {
    * const time = PreciseDate.parseFull(struct);
    * console.log(time); // expected output: "1549622069481145231"
    */
-  static parseFull(time: string|bigint|DateTuple|protobuf.ITimestamp): string {
+  static parseFull(time: string|bigint|DateTuple|ProtobufDate): string {
     const date = new PreciseDate();
 
     if (Array.isArray(time)) {
@@ -444,7 +450,7 @@ export class PreciseDate extends Date {
     if (isFullTime(time)) {
       date.setFullTime(time as string | bigint);
     } else if (isStruct(time)) {
-      const {seconds, nanos} = parseProto(time as protobuf.ITimestamp);
+      const {seconds, nanos} = parseProto(time as ProtobufDate);
       date.setTime(seconds * 1000);
       date.setNanoseconds(nanos);
     } else if (isFullISOString(time)) {
@@ -543,7 +549,7 @@ function parseFullISO(time: string): string {
  * @param {google.protobuf.Timestamp} timestamp The timestamp object.
  * @returns {DateStruct}
  */
-function parseProto({seconds = 0, nanos = 0}: protobuf.ITimestamp): DateStruct {
+function parseProto({seconds = 0, nanos = 0}: ProtobufDate): DateStruct {
   if (typeof (seconds as Long).toNumber === 'function') {
     seconds = (seconds as Long).toNumber();
   }

@@ -15,7 +15,6 @@
  */
 
 import * as assert from 'assert';
-import * as Long from 'long';
 import * as sinon from 'sinon';
 
 import {DateTuple, PreciseDate} from '../src';
@@ -24,6 +23,16 @@ class FakeBigInt {
   value: number|string;
   constructor(value: number|string) {
     this.value = value;
+  }
+}
+
+class FakeLong {
+  value: number;
+  constructor(value: number) {
+    this.value = value;
+  }
+  toNumber(): number {
+    return this.value;
   }
 }
 
@@ -391,7 +400,7 @@ describe('PreciseDate', () => {
 
     it('should parse a protobuf Timestamp', () => {
       const expectedTimestamp = `${SECS}000000000`;
-      const seconds = Long.fromNumber(SECS);
+      const seconds = new FakeLong(SECS);
       const timestamp = PreciseDate.parseFull({seconds});
       assert.strictEqual(timestamp, expectedTimestamp);
     });
