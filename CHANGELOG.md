@@ -4,6 +4,12 @@
 
 [1]: https://www.npmjs.com/package/nodejs-precise-date?activeTab=versions
 
+## v0.1.0
+
+02-19-2019 12:27 PST
+
+### Hello, world!
+
 ## v0.3.1
 
 ### Internal / Testing Changes
