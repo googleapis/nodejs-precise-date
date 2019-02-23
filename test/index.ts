@@ -26,6 +26,17 @@ class FakeBigInt {
   }
 }
 
+function bigIntFactory(value: number|string): FakeBigInt {
+  return new FakeBigInt(value);
+}
+
+// while BigInt can't be used as a constructor, Node 11+ will attempt to read
+// members from its prototype chain. We could declare FakeBigInt as a function
+// prototype but that seems to be difficult (impossible?) to do in TypeScript.
+bigIntFactory.prototype.valueOf = function(): number|string {
+  return this.value;
+};
+
 class FakeLong {
   value: number;
   constructor(value: number) {
@@ -72,7 +83,7 @@ describe('PreciseDate', () => {
 
   beforeEach(() => {
     // tslint:disable-next-line no-any
-    (global as any).BigInt = (value: number|string) => new FakeBigInt(value);
+    (global as any).BigInt = bigIntFactory;
     date = new PreciseDate(TIME_STRING);
   });
 
