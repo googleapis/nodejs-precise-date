@@ -9,21 +9,11 @@
 02-19-2019 12:27 PST
 
 ### Hello, world!
+- feat: initial code commit (#1)
 
-## v0.3.1
+### Documentation
+- docs: update links in contrib guide (#4)
 
 ### Internal / Testing Changes
-- Add synth script and update CI (#14)
-- chore(deps): update dependency nyc to v13 (#12)
-- chore: ignore package-lock.json (#11)
-- chore(deps): lock file maintenance (#10)
-- chore: update renovate config (#9)
-- remove that whitespace (#8)
-- chore(deps): lock file maintenance (#7)
-- chore(deps): update dependency typescript to v3 (#6)
-- chore: assert.deelEqual => assert.deepStrictEqual (#5)
-- chore: move mocha options to mocha.opts (#4)
-- chore(deps): update dependency gts to ^0.8.0 (#1)
-- chore(deps): lock file maintenance (#3)
-- chore(deps): lock file maintenance (#2)
-
+- chore: add missing boilerplate files (#3)
+- chore: add dummy docs-test script and fix tests for Node 11 (#6)
