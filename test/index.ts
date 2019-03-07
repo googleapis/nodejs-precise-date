@@ -264,8 +264,8 @@ describe('PreciseDate', () => {
   });
 
   describe('#setFullTime()', () => {
-    let timeStub: sinon.SinonStub;
-    let nanosStub: sinon.SinonStub;
+    let timeStub: sinon.SinonStub<[number], number>;
+    let nanosStub: sinon.SinonStub<[number], string>;
 
     beforeEach(() => {
       timeStub = sandbox.stub(date, 'setTime');

@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/precise-date",
   "version": "0.1.0",
-  "description": "",
+  "description": "A simple utility for precise-dateing functions and classes.",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
   "repository": "googleapis/nodejs-precise-date",
@@ -20,7 +20,7 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test"
   },
-  "keywords": [],
+  "keywords": ["nano", "date", "time", "precise"],
   "files": [
     "build/src",
     "!build/src/**/*.map"
