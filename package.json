@@ -20,7 +20,12 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test"
   },
-  "keywords": ["nano", "date", "time", "precise"],
+  "keywords": [
+    "nano",
+    "date",
+    "time",
+    "precise"
+  ],
   "files": [
     "build/src",
     "!build/src/**/*.map"
