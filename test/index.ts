@@ -20,20 +20,20 @@ import * as sinon from 'sinon';
 import {DateTuple, PreciseDate} from '../src';
 
 class FakeBigInt {
-  value: number|string;
-  constructor(value: number|string) {
+  value: number | string;
+  constructor(value: number | string) {
     this.value = value;
   }
 }
 
-function bigIntFactory(value: number|string): FakeBigInt {
+function bigIntFactory(value: number | string): FakeBigInt {
   return new FakeBigInt(value);
 }
 
 // while BigInt can't be used as a constructor, Node 11+ will attempt to read
 // members from its prototype chain. We could declare FakeBigInt as a function
 // prototype but that seems to be difficult (impossible?) to do in TypeScript.
-bigIntFactory.prototype.valueOf = function(): number|string {
+bigIntFactory.prototype.valueOf = function(): number | string {
   return this.value;
 };
 
@@ -55,8 +55,7 @@ describe('PreciseDate', () => {
   let RealBigInt: typeof BigInt;
   let date: PreciseDate;
 
-  const NO_BIG_INT_ERR =
-      /BigInt only available in Node \>\= v10\.7. Consider using getFullTimeString instead\./;
+  const NO_BIG_INT_ERR = /BigInt only available in Node \>\= v10\.7. Consider using getFullTimeString instead\./;
 
   const SECS = 1547253035;
   const NANOS = 381101032;
@@ -99,9 +98,10 @@ describe('PreciseDate', () => {
       const fakeTimestamp = '123456789';
       const setStub = sandbox.stub(PreciseDate.prototype, 'setFullTime');
 
-      sandbox.stub(PreciseDate, 'parseFull')
-          .withArgs(TIME_STRING)
-          .returns(fakeTimestamp);
+      sandbox
+        .stub(PreciseDate, 'parseFull')
+        .withArgs(TIME_STRING)
+        .returns(fakeTimestamp);
 
       const date = new PreciseDate(TIME_STRING);
       const [timestamp] = setStub.lastCall.args;
@@ -114,8 +114,16 @@ describe('PreciseDate', () => {
       const nanosStub = sandbox.stub(PreciseDate.prototype, 'setNanoseconds');
 
       const date = new PreciseDate(
-          YEAR, MONTH, DAY, HOURS, MINUTES, SECONDS, MILLISECONDS, MICROSECONDS,
-          NANOSECONDS);
+        YEAR,
+        MONTH,
+        DAY,
+        HOURS,
+        MINUTES,
+        SECONDS,
+        MILLISECONDS,
+        MICROSECONDS,
+        NANOSECONDS
+      );
 
       const [time] = timeStub.lastCall.args;
       const [micros] = microsStub.lastCall.args;
@@ -161,7 +169,7 @@ describe('PreciseDate', () => {
     });
 
     it('should correctly return dates < Unix epoch', () => {
-      const expectedTime = `${- SECS + 1}${1e9 - NANOS}`;
+      const expectedTime = `${-SECS + 1}${1e9 - NANOS}`;
 
       const date = new PreciseDate({seconds: -SECS, nanos: NANOS});
       const timestamp = date.getFullTimeString();
@@ -464,9 +472,10 @@ describe('PreciseDate', () => {
         NANOSECONDS,
       ];
 
-      sandbox.stub(PreciseDate, 'fullUTCString')
-          .withArgs(...dateFields)
-          .returns(TIME_STRING);
+      sandbox
+        .stub(PreciseDate, 'fullUTCString')
+        .withArgs(...dateFields)
+        .returns(TIME_STRING);
 
       const timestamp = PreciseDate.fullUTC(...dateFields);
       assert.deepStrictEqual(timestamp, expectedTimestamp);
@@ -476,10 +485,16 @@ describe('PreciseDate', () => {
   describe('.fullUTCString()', () => {
     it('should accept microseconds and nanoseconds', () => {
       const utcDate = PreciseDate.fullUTCString(
-          date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
-          date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(),
-          date.getUTCMilliseconds(), date.getMicroseconds(),
-          date.getNanoseconds());
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getUTCDate(),
+        date.getUTCHours(),
+        date.getUTCMinutes(),
+        date.getUTCSeconds(),
+        date.getUTCMilliseconds(),
+        date.getMicroseconds(),
+        date.getNanoseconds()
+      );
 
       assert.deepStrictEqual(utcDate, date.getFullTimeString());
     });
