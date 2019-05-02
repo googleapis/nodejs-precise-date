@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/nodejs-precise-date?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-precise-date/compare/v0.1.0...v1.0.0) (2019-05-02)
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#25](https://www.github.com/googleapis/nodejs-precise-date/issues/25)) ([10b9cc1](https://www.github.com/googleapis/nodejs-precise-date/commit/10b9cc1))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#25)
+
 ## v0.1.0
 
 02-19-2019 12:27 PST
