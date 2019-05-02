@@ -16,7 +16,7 @@
 
 const FULL_ISO_REG = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d{4,9}Z/;
 const NO_BIG_INT =
-    'BigInt only available in Node >= v10.7. Consider using getFullTimeString instead.';
+  'BigInt only available in Node >= v10.7. Consider using getFullTimeString instead.';
 
 export type DateTuple = [number, number];
 
@@ -33,14 +33,14 @@ interface Long {
 }
 
 interface ProtobufDate {
-  seconds?: number|string|Long;
-  nanos?: number|string;
+  seconds?: number | string | Long;
+  nanos?: number | string;
 }
 
 enum Sign {
   NEGATIVE = -1,
   POSITIVE = 1,
-  ZERO = 0
+  ZERO = 0,
 }
 
 /**
@@ -101,13 +101,22 @@ enum Sign {
 export class PreciseDate extends Date {
   private _micros = 0;
   private _nanos = 0;
-  constructor(time?: number|Date);
-  constructor(preciseTime: string|bigint|DateTuple|ProtobufDate);
+  constructor(time?: number | Date);
+  constructor(preciseTime: string | bigint | DateTuple | ProtobufDate);
   constructor(
-      year: number, month?: number, date?: number, hours?: number,
-      minutes?: number, seconds?: number, milliseconds?: number,
-      microseconds?: number, nanoseconds?: number);
-  constructor(time?: number|string|bigint|Date|DateTuple|ProtobufDate) {
+    year: number,
+    month?: number,
+    date?: number,
+    hours?: number,
+    minutes?: number,
+    seconds?: number,
+    milliseconds?: number,
+    microseconds?: number,
+    nanoseconds?: number
+  );
+  constructor(
+    time?: number | string | bigint | Date | DateTuple | ProtobufDate
+  ) {
     super();
 
     if (time && typeof time !== 'number' && !(time instanceof Date)) {
@@ -286,7 +295,7 @@ export class PreciseDate extends Date {
    * @example <caption>With a BigInt</caption>
    * date.setFullTime(1549622069481145231n);
    */
-  setFullTime(time: string|number|bigint): string {
+  setFullTime(time: string | number | bigint): string {
     if (typeof time !== 'string') {
       time = time.toString();
     }
@@ -439,7 +448,7 @@ export class PreciseDate extends Date {
    * const time = PreciseDate.parseFull(struct);
    * console.log(time); // expected output: "1549622069481145231"
    */
-  static parseFull(time: string|bigint|DateTuple|ProtobufDate): string {
+  static parseFull(time: string | bigint | DateTuple | ProtobufDate): string {
     const date = new PreciseDate();
 
     if (Array.isArray(time)) {
@@ -503,7 +512,7 @@ export class PreciseDate extends Date {
    * 231); console.log(time); // expected output: '1549622069481145231'
    */
   static fullUTCString(...args: number[]): string {
-    const milliseconds = Date.UTC(...args.slice(0, 7) as DateFields);
+    const milliseconds = Date.UTC(...(args.slice(0, 7) as DateFields));
     const date = new PreciseDate(milliseconds);
 
     if (args.length === 9) {
@@ -570,8 +579,9 @@ function parseProto({seconds = 0, nanos = 0}: ProtobufDate): DateStruct {
  * @returns {boolean}
  */
 function isFullTime(time: unknown): boolean {
-  return typeof time === 'bigint' ||
-      typeof time === 'string' && /^\d+$/.test(time);
+  return (
+    typeof time === 'bigint' || (typeof time === 'string' && /^\d+$/.test(time))
+  );
 }
 
 /**
@@ -583,9 +593,11 @@ function isFullTime(time: unknown): boolean {
  * @returns {boolean}
  */
 function isStruct(time: unknown): time is DateStruct {
-  return typeof time === 'object' &&
-      typeof (time as DateStruct).seconds !== 'undefined' ||
-      typeof (time as DateStruct).nanos === 'number';
+  return (
+    (typeof time === 'object' &&
+      typeof (time as DateStruct).seconds !== 'undefined') ||
+    typeof (time as DateStruct).nanos === 'number'
+  );
 }
 
 /**
@@ -609,7 +621,7 @@ function isFullISOString(time: unknown): boolean {
  * @param {number} min The min size of the padded string.
  * @returns {string}
  */
-function padLeft(n: number|string, min: number): string {
+function padLeft(n: number | string, min: number): string {
   const padding = getPadding(n, min);
   return `${padding}${n}`;
 }
@@ -623,7 +635,7 @@ function padLeft(n: number|string, min: number): string {
  * @param {number} min The min size of the padded string.
  * @returns {string}
  */
-function padRight(n: number|string, min: number): string {
+function padRight(n: number | string, min: number): string {
   const padding = getPadding(n, min);
   return `${n}${padding}`;
 }
@@ -637,7 +649,7 @@ function padRight(n: number|string, min: number): string {
  * @param {number} [min=3] The min size of the padded string.
  * @returns {string}
  */
-function getPadding(n: number|string, min: number): string {
+function getPadding(n: number | string, min: number): string {
   const size = Math.max(min - n.toString().length, 0);
   return '0'.repeat(size);
 }
