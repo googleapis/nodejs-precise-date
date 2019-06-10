@@ -1,0 +1,8 @@
+{
+  "name": "precise-date",
+  "name_pretty": "Google Cloud Precise Date",
+  "release_level": "ga",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-precise-date",
+  "distribution_name": "@google-cloud/precise-date"
+}
