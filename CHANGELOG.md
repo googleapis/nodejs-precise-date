@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-precise-date?activeTab=versions
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-precise-date/compare/v1.0.0...v1.0.1) (2019-06-27)
+
+
+### Bug Fixes
+
+* **docs:** make anchors work in jsdoc ([#43](https://www.github.com/googleapis/nodejs-precise-date/issues/43)) ([5828db8](https://www.github.com/googleapis/nodejs-precise-date/commit/5828db8))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-precise-date/compare/v0.1.0...v1.0.0) (2019-05-02)
 
 
