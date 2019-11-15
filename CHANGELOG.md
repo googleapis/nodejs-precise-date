@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-precise-date?activeTab=versions
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-precise-date/compare/v1.0.1...v1.0.2) (2019-11-15)
+
+
+### Bug Fixes
+
+* **docs:** add jsdoc-region-tag plugin ([#60](https://www.github.com/googleapis/nodejs-precise-date/issues/60)) ([a975b1c](https://www.github.com/googleapis/nodejs-precise-date/commit/a975b1c39b9ad283b48eb8e2cb13d9eb1cb053ba))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-precise-date/compare/v1.0.0...v1.0.1) (2019-06-27)
 
 
