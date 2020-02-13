@@ -13,12 +13,12 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run lint",
     "docs": "echo no docs 👻",
     "docs-test": "echo no docs 👻",
     "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "mocha build/system-test"
+    "system-test": "mocha build/system-test",
+    "prelint": "cd samples; npm link ../; npm i"
   },
   "keywords": [
     "nano",
