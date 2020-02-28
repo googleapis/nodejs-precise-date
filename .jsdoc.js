@@ -31,7 +31,7 @@ module.exports = {
   source: {
     excludePattern: '(^|\\/|\\\\)[._]',
     include: [
-      'src'
+      'src',
     ],
     includePattern: '\\.js$'
   },
@@ -42,7 +42,7 @@ module.exports = {
     systemName: '@google-cloud/precise-date',
     theme: 'lumen',
     default: {
-      "outputSourceFiles": false
+      outputSourceFiles: false
     }
   },
   markdown: {
