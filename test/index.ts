@@ -15,7 +15,7 @@
  */
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import * as sinon from 'sinon';
 
 import {DateTuple, PreciseDate} from '../src';
@@ -34,7 +34,7 @@ function bigIntFactory(value: number | string): FakeBigInt {
 // while BigInt can't be used as a constructor, Node 11+ will attempt to read
 // members from its prototype chain. We could declare FakeBigInt as a function
 // prototype but that seems to be difficult (impossible?) to do in TypeScript.
-bigIntFactory.prototype.valueOf = function(): number | string {
+bigIntFactory.prototype.valueOf = function (): number | string {
   return this.value;
 };
 
@@ -56,7 +56,7 @@ describe('PreciseDate', () => {
   let RealBigInt: typeof BigInt;
   let date: PreciseDate;
 
-  const NO_BIG_INT_ERR = /BigInt only available in Node \>\= v10\.7. Consider using getFullTimeString instead\./;
+  const NO_BIG_INT_ERR = /BigInt only available in Node >= v10\.7. Consider using getFullTimeString instead\./;
 
   const SECS = 1547253035;
   const NANOS = 381101032;
@@ -77,18 +77,18 @@ describe('PreciseDate', () => {
   const NANOSECONDS = 32;
 
   before(() => {
-    // tslint:disable-next-line no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     RealBigInt = (global as any).BigInt;
   });
 
   beforeEach(() => {
-    // tslint:disable-next-line no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (global as any).BigInt = bigIntFactory;
     date = new PreciseDate(TIME_STRING);
   });
 
   after(() => {
-    // tslint:disable-next-line no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (global as any).BigInt = RealBigInt;
   });
 
@@ -104,6 +104,7 @@ describe('PreciseDate', () => {
         .withArgs(TIME_STRING)
         .returns(fakeTimestamp);
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const date = new PreciseDate(TIME_STRING);
       const [timestamp] = setStub.lastCall.args;
       assert.strictEqual(timestamp, fakeTimestamp);
@@ -114,6 +115,7 @@ describe('PreciseDate', () => {
       const microsStub = sandbox.stub(PreciseDate.prototype, 'setMicroseconds');
       const nanosStub = sandbox.stub(PreciseDate.prototype, 'setNanoseconds');
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const date = new PreciseDate(
         YEAR,
         MONTH,
@@ -141,7 +143,7 @@ describe('PreciseDate', () => {
     });
 
     it('should throw an error if BigInt is unavailable', () => {
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       delete (global as any).BigInt;
 
       assert.throws(() => date.getFullTime(), NO_BIG_INT_ERR);
@@ -453,7 +455,7 @@ describe('PreciseDate', () => {
 
   describe('.fullUTC()', () => {
     it('should throw an error if BigInt is unavailable', () => {
-      // tslint:disable-next-line no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       delete (global as any).BigInt;
 
       assert.throws(() => PreciseDate.fullUTC(), NO_BIG_INT_ERR);

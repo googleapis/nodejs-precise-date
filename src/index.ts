@@ -124,6 +124,7 @@ export class PreciseDate extends Date {
       return;
     }
 
+    // eslint-disable-next-line prefer-rest-params
     const args: number[] = Array.from(arguments);
     const dateFields = args.slice(0, 7) as DateFields;
     const date = new Date(...dateFields);
@@ -302,7 +303,7 @@ export class PreciseDate extends Date {
 
     const sign = Math.sign(Number(time));
 
-    time = time.replace(/^\-/, '');
+    time = time.replace(/^-/, '');
 
     const seconds = Number(time.substr(0, time.length - 9)) * sign;
     const nanos = Number(time.substr(-9)) * sign;
