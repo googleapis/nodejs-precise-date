@@ -38,7 +38,7 @@
     "@types/sinon": "^7.0.5",
     "c8": "^7.0.0",
     "codecov": "^3.0.4",
-    "gts": "2.0.0-alpha.5",
+    "gts": "next",
     "mocha": "^7.0.0",
     "sinon": "^9.0.0",
     "typescript": "^3.8.3"
