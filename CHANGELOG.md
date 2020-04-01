@@ -4,19 +4,6 @@
 
 [1]: https://www.npmjs.com/package/nodejs-precise-date?activeTab=versions
 
-## [2.0.0](https://www.github.com/googleapis/nodejs-precise-date/compare/v1.0.3...v2.0.0) (2020-03-26)
-
-
-### ⚠ BREAKING CHANGES
-
-* **dep:** upgrade typescript/gts (#97)
-* **dep:** deprecate Node 8 to 10 (#92)
-
-### Miscellaneous Chores
-
-* **dep:** deprecate Node 8 to 10 ([#92](https://www.github.com/googleapis/nodejs-precise-date/issues/92)) ([75ca209](https://www.github.com/googleapis/nodejs-precise-date/commit/75ca209b49abcba8efcbc401b270ac1346874647))
-* **dep:** upgrade typescript/gts ([#97](https://www.github.com/googleapis/nodejs-precise-date/issues/97)) ([59ca2de](https://www.github.com/googleapis/nodejs-precise-date/commit/59ca2de8f6da249808dddebdba3961e59140d06d))
-
 ### [1.0.3](https://www.github.com/googleapis/nodejs-precise-date/compare/v1.0.2...v1.0.3) (2019-12-05)
 
 
