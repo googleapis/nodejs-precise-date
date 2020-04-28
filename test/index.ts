@@ -61,7 +61,7 @@ describe('PreciseDate', () => {
   const SECS = 1547253035;
   const NANOS = 381101032;
 
-  const FULL_ISO_STRING = `2019-01-12T00:30:35.381101032Z`;
+  const FULL_ISO_STRING = '2019-01-12T00:30:35.381101032Z';
   const TIME_STRING = `${SECS}${NANOS}`;
 
   const LOCAL_DATE = new Date(FULL_ISO_STRING);
@@ -439,7 +439,7 @@ describe('PreciseDate', () => {
     });
 
     it('should parse a micro precise ISO string', () => {
-      const microIsoString = `2019-01-12T00:30:35.381101Z`;
+      const microIsoString = '2019-01-12T00:30:35.381101Z';
       const expectedTimestamp = `${SECS}${MILLISECONDS}${MICROSECONDS}000`;
       const timestamp = PreciseDate.parseFull(microIsoString);
       assert.strictEqual(timestamp, expectedTimestamp);

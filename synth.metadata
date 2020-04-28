@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-precise-date.git",
-        "sha": "903a7237637881e886120124ae21fe5e161142dc"
+        "sha": "22157eca5fca9f2e19f53f162560d945c9bf4c08"
       }
     },
     {
