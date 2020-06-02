@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-precise-date?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-precise-date/compare/v2.0.0...v2.0.1) (2020-05-08)
+
+
+### Bug Fixes
+
+* apache license URL ([#468](https://www.github.com/googleapis/nodejs-precise-date/issues/468)) ([#103](https://www.github.com/googleapis/nodejs-precise-date/issues/103)) ([efdc8c6](https://www.github.com/googleapis/nodejs-precise-date/commit/efdc8c6a1e5f8b35da4c5e6ff03fa1f2be6c790f))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-precise-date/compare/v1.0.3...v2.0.0) (2020-03-26)
 
 
