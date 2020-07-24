@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-precise-date?activeTab=versions
 
+### [2.0.3](https://www.github.com/googleapis/nodejs-precise-date/compare/v2.0.2...v2.0.3) (2020-07-24)
+
+
+### Bug Fixes
+
+* move gitattributes files to node templates ([#130](https://www.github.com/googleapis/nodejs-precise-date/issues/130)) ([d4de5dd](https://www.github.com/googleapis/nodejs-precise-date/commit/d4de5dd73a4aec17c4c8c1e8a95335e1d3e656e5))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-precise-date/compare/v2.0.1...v2.0.2) (2020-07-06)
 
 
