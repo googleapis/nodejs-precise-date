@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-precise-date.git",
-        "sha": "908878e82a7a556128e8d9263099011e7df16a3c"
+        "sha": "97c187015f80a3e8ed9a20cf73ccd3f6dd0f4f4a"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "5451633881133e5573cc271a18e73b18caca8b1b"
+        "sha": "901ddd44e9ef7887ee681b9183bbdea99437fdcc"
       }
     }
   ],
