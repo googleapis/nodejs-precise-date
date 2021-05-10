@@ -56,7 +56,8 @@ describe('PreciseDate', () => {
   let RealBigInt: typeof BigInt;
   let date: PreciseDate;
 
-  const NO_BIG_INT_ERR = /BigInt only available in Node >= v10\.7. Consider using getFullTimeString instead\./;
+  const NO_BIG_INT_ERR =
+    /BigInt only available in Node >= v10\.7. Consider using getFullTimeString instead\./;
 
   const SECS = 1547253035;
   const NANOS = 381101032;
