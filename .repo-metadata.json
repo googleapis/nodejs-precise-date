@@ -6,6 +6,5 @@
   "repo": "googleapis/nodejs-precise-date",
   "distribution_name": "@google-cloud/precise-date",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/precise-date/latest",
-  "api_shortname": "precise-date",
-  "library_type": "GAPIC_AUTO"
+  "library_type": "OTHER"
 }
