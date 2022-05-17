@@ -4,6 +4,45 @@
 
 [1]: https://www.npmjs.com/package/nodejs-precise-date?activeTab=versions
 
+## 1.0.0 (2022-05-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#215)
+* **dep:** upgrade typescript/gts (#97)
+* **dep:** deprecate Node 8 to 10 (#92)
+* upgrade engines field to >=8.10.0 (#25)
+
+### Features
+
+* initial code commit ([e392611](https://github.com/googleapis/nodejs-precise-date/commit/e392611e2ba69e7352461958af279023622c05b8))
+* initial code commit ([#1](https://github.com/googleapis/nodejs-precise-date/issues/1)) ([e392611](https://github.com/googleapis/nodejs-precise-date/commit/e392611e2ba69e7352461958af279023622c05b8))
+
+
+### Bug Fixes
+
+* apache license URL ([#468](https://github.com/googleapis/nodejs-precise-date/issues/468)) ([#103](https://github.com/googleapis/nodejs-precise-date/issues/103)) ([efdc8c6](https://github.com/googleapis/nodejs-precise-date/commit/efdc8c6a1e5f8b35da4c5e6ff03fa1f2be6c790f))
+* **build:** switch primary branch to main ([#186](https://github.com/googleapis/nodejs-precise-date/issues/186)) ([aaa4044](https://github.com/googleapis/nodejs-precise-date/commit/aaa4044fdf81aaeee8b62e00f71abd9b9d1a0827))
+* **deps:** pin TypeScript below 3.7.0 ([c4aef9c](https://github.com/googleapis/nodejs-precise-date/commit/c4aef9c42cfab91c4701891d12a7b7118e3ba76c))
+* **docs:** add jsdoc-region-tag plugin ([#60](https://github.com/googleapis/nodejs-precise-date/issues/60)) ([a975b1c](https://github.com/googleapis/nodejs-precise-date/commit/a975b1c39b9ad283b48eb8e2cb13d9eb1cb053ba))
+* **docs:** make anchors work in jsdoc ([#43](https://github.com/googleapis/nodejs-precise-date/issues/43)) ([5828db8](https://github.com/googleapis/nodejs-precise-date/commit/5828db85e1d85147b10a06dec5b8c789e8c79fbd))
+* move gitattributes files to node templates ([#130](https://github.com/googleapis/nodejs-precise-date/issues/130)) ([d4de5dd](https://github.com/googleapis/nodejs-precise-date/commit/d4de5dd73a4aec17c4c8c1e8a95335e1d3e656e5))
+* update license headers ([116d26a](https://github.com/googleapis/nodejs-precise-date/commit/116d26ab195af673cdae49c8f6321ca54b5c99f2))
+* update node issue template ([#117](https://github.com/googleapis/nodejs-precise-date/issues/117)) ([ae4d6a1](https://github.com/googleapis/nodejs-precise-date/commit/ae4d6a1d07e5327d25eda58e709f3d547ffca607))
+
+
+### Miscellaneous Chores
+
+* **dep:** deprecate Node 8 to 10 ([#92](https://github.com/googleapis/nodejs-precise-date/issues/92)) ([75ca209](https://github.com/googleapis/nodejs-precise-date/commit/75ca209b49abcba8efcbc401b270ac1346874647))
+* **dep:** upgrade typescript/gts ([#97](https://github.com/googleapis/nodejs-precise-date/issues/97)) ([59ca2de](https://github.com/googleapis/nodejs-precise-date/commit/59ca2de8f6da249808dddebdba3961e59140d06d))
+
+
+### Build System
+
+* update library to use Node 12 ([#215](https://github.com/googleapis/nodejs-precise-date/issues/215)) ([209a3d1](https://github.com/googleapis/nodejs-precise-date/commit/209a3d1a8a0bf4841c695c6fffe5ef663857161f))
+* upgrade engines field to >=8.10.0 ([#25](https://github.com/googleapis/nodejs-precise-date/issues/25)) ([10b9cc1](https://github.com/googleapis/nodejs-precise-date/commit/10b9cc18d46eb8406d78270fe5f30bc2f57096ab))
+
 ### [2.0.4](https://www.github.com/googleapis/nodejs-precise-date/compare/v2.0.3...v2.0.4) (2021-09-09)
 
 
