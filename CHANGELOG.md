@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-precise-date?activeTab=versions
 
+## [3.0.0](https://github.com/googleapis/nodejs-precise-date/compare/v2.0.4...v3.0.0) (2022-06-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* update library to use Node 12 (#215)
+
+### Build System
+
+* update library to use Node 12 ([#215](https://github.com/googleapis/nodejs-precise-date/issues/215)) ([209a3d1](https://github.com/googleapis/nodejs-precise-date/commit/209a3d1a8a0bf4841c695c6fffe5ef663857161f))
+
 ### [2.0.4](https://www.github.com/googleapis/nodejs-precise-date/compare/v2.0.3...v2.0.4) (2021-09-09)
 
 
