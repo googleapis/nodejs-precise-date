@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-precise-date?activeTab=versions
 
+## [3.0.1](https://github.com/googleapis/nodejs-precise-date/compare/v3.0.0...v3.0.1) (2022-08-23)
+
+
+### Bug Fixes
+
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-precise-date/issues/1546)) ([#219](https://github.com/googleapis/nodejs-precise-date/issues/219)) ([8a81e94](https://github.com/googleapis/nodejs-precise-date/commit/8a81e94c0430ff801978bedf8827f2b978f352fb))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-precise-date/compare/v2.0.4...v3.0.0) (2022-06-07)
 
 
