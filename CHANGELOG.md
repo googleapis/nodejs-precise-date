@@ -2,7 +2,7 @@
 
 [npm history][1]
 
-[1]: https://www.npmjs.com/package/nodejs-precise-date?activeTab=versions
+[1]: https://www.npmjs.com/package/@google-cloud/precise-date?activeTab=versions
 
 ## [3.0.1](https://github.com/googleapis/nodejs-precise-date/compare/v3.0.0...v3.0.1) (2022-08-23)
 
