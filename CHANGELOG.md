@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/precise-date?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-precise-date/compare/v3.0.1...v4.0.0) (2023-08-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 14 ([#235](https://github.com/googleapis/nodejs-precise-date/issues/235))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 14 ([#235](https://github.com/googleapis/nodejs-precise-date/issues/235)) ([730c500](https://github.com/googleapis/nodejs-precise-date/commit/730c50022954bf4c9fbef9b6fa357266859660c3))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-precise-date/compare/v3.0.0...v3.0.1) (2022-08-23)
 
 
