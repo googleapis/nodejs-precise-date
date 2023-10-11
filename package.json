@@ -41,7 +41,7 @@
     "codecov": "^3.0.4",
     "gts": "^5.0.0",
     "mocha": "^9.2.2",
-    "sinon": "^15.0.0",
+    "sinon": "^16.0.0",
     "typescript": "^5.1.6"
   },
   "engines": {
