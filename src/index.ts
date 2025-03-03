@@ -112,10 +112,10 @@ export class PreciseDate extends Date {
     seconds?: number,
     milliseconds?: number,
     microseconds?: number,
-    nanoseconds?: number
+    nanoseconds?: number,
   );
   constructor(
-    time?: number | string | bigint | Date | DateTuple | ProtobufDate
+    time?: number | string | bigint | Date | DateTuple | ProtobufDate,
   ) {
     super();
 

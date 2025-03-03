@@ -126,7 +126,7 @@ describe('PreciseDate', () => {
         SECONDS,
         MILLISECONDS,
         MICROSECONDS,
-        NANOSECONDS
+        NANOSECONDS,
       );
 
       const [time] = timeStub.lastCall.args;
@@ -497,7 +497,7 @@ describe('PreciseDate', () => {
         date.getUTCSeconds(),
         date.getUTCMilliseconds(),
         date.getMicroseconds(),
-        date.getNanoseconds()
+        date.getNanoseconds(),
       );
 
       assert.deepStrictEqual(utcDate, date.getFullTimeString());
