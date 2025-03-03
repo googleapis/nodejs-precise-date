@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/precise-date?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/nodejs-precise-date/compare/v4.0.0...v5.0.0) (2025-03-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 18 ([#265](https://github.com/googleapis/nodejs-precise-date/issues/265))
+
+### Miscellaneous Chores
+
+* Migrate to Node 18 ([#265](https://github.com/googleapis/nodejs-precise-date/issues/265)) ([1f9ab27](https://github.com/googleapis/nodejs-precise-date/commit/1f9ab2711a3712c7583bd85f68a362203eb956c7))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-precise-date/compare/v3.0.1...v4.0.0) (2023-08-10)
 
 
