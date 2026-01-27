@@ -136,6 +136,26 @@ describe('PreciseDate', () => {
       assert.strictEqual(micros, MICROSECONDS);
       assert.strictEqual(nanos, NANOSECONDS);
     });
+
+    it('should accept picoseconds in constructor', () => {
+      // year, month, date, hours, minutes, seconds, millis, micros, nanos, picos
+      const date = new PreciseDate(
+        YEAR,
+        MONTH,
+        DAY,
+        HOURS,
+        MINUTES,
+        SECONDS,
+        MILLISECONDS,
+        MICROSECONDS,
+        NANOSECONDS,
+        123,
+      );
+      assert.strictEqual(date.getPicoseconds(), 123);
+      assert.strictEqual(date.getNanoseconds(), NANOSECONDS);
+      assert.strictEqual(date.getMicroseconds(), MICROSECONDS);
+      assert.strictEqual(date.getUTCMilliseconds(), MILLISECONDS);
+    });
   });
 
   describe('#getFullTime()', () => {
@@ -200,6 +220,14 @@ describe('PreciseDate', () => {
     it('should return the nanoseconds', () => {
       const nanoseconds = date.getNanoseconds();
       assert.strictEqual(nanoseconds, NANOSECONDS);
+    });
+  });
+
+  describe('#getPicoseconds()', () => {
+    it('should return the picoseconds', () => {
+      const date = new PreciseDate(TIME_STRING);
+      date.setPicoseconds(123);
+      assert.strictEqual(date.getPicoseconds(), 123);
     });
   });
 
@@ -272,6 +300,41 @@ describe('PreciseDate', () => {
       date.setNanoseconds(nanos);
       assert.strictEqual(date.getNanoseconds(), expectedNanos);
       assert.strictEqual(date.getMicroseconds(), expectedMicros);
+    });
+  });
+
+  describe('#setPicoseconds()', () => {
+    it('should set picoseconds correctly', () => {
+      const date = new PreciseDate(TIME_STRING);
+      date.setPicoseconds(999);
+      assert.strictEqual(date.getPicoseconds(), 999);
+    });
+
+    it('should return the precise time string', () => {
+      const fakeTimestamp = '123456789';
+      sandbox.stub(date, 'setNanoseconds').returns(fakeTimestamp);
+
+      const timestamp = date.setPicoseconds(0);
+      assert.strictEqual(timestamp, fakeTimestamp);
+    });
+
+    it('should cascade overflow from setPicoseconds', () => {
+      const date = new PreciseDate({seconds: SECS, nanos: 789});
+      // 1000 picos = 1 nano
+      // Current nanos: 789
+      // New nanos should be 790
+      date.setPicoseconds(1001);
+      assert.strictEqual(date.getPicoseconds(), 1);
+      assert.strictEqual(date.getNanoseconds(), 790);
+    });
+
+    it('should handle negative picoseconds', () => {
+      const date = new PreciseDate({seconds: SECS, nanos: 789});
+      // Current: ...789 nanos, 0 picos
+      // set -1 pico -> ...788 nanos, 999 picos
+      date.setPicoseconds(-1);
+      assert.strictEqual(date.getPicoseconds(), 999);
+      assert.strictEqual(date.getNanoseconds(), 788);
     });
   });
 
@@ -362,6 +425,19 @@ describe('PreciseDate', () => {
       const isoString = date.toISOString();
       assert.strictEqual(isoString, FULL_ISO_STRING);
     });
+
+    it('should format to 12-digit fractional ISO string when picos > 0', () => {
+      const PICO_ISO_STRING = '2019-01-12T00:30:35.123456789123Z';
+      const date = new PreciseDate(PICO_ISO_STRING);
+      assert.strictEqual(date.toISOString(), PICO_ISO_STRING);
+    });
+
+    it('should format to 9-digit fractional ISO string when picos == 0', () => {
+      const NANO_ISO_STRING = '2019-01-12T00:30:35.123456789Z';
+      const date = new PreciseDate(NANO_ISO_STRING);
+      assert.strictEqual(date.getPicoseconds(), 0);
+      assert.strictEqual(date.toISOString(), NANO_ISO_STRING);
+    });
   });
 
   describe('#toStruct()', () => {
@@ -451,6 +527,15 @@ describe('PreciseDate', () => {
       const expectedTimestamp = `${date.getTime()}000000`;
       const timestamp = PreciseDate.parseFull(date.toISOString());
       assert.strictEqual(timestamp, expectedTimestamp);
+    });
+
+    it('should parse 12-digit fractional ISO string', () => {
+      const PICO_ISO_STRING = '2019-01-12T00:30:35.123456789123Z';
+      const date = new PreciseDate(PICO_ISO_STRING);
+      assert.strictEqual(date.getPicoseconds(), 123);
+      assert.strictEqual(date.getNanoseconds(), 789);
+      assert.strictEqual(date.getMicroseconds(), 456);
+      assert.strictEqual(date.getUTCMilliseconds(), 123);
     });
   });
 
