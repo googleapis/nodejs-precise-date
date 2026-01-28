@@ -410,6 +410,8 @@ export class PreciseDate extends Date {
     let picos = '';
 
     if (this._picos > 0) {
+      // only include picoseconds if they are non-zero to avoid
+      // breaking existing consumers of this method.
       picos = padLeft(this._picos, 3);
     }
 
