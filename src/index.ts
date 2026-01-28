@@ -123,12 +123,11 @@ export class PreciseDate extends Date {
 
     if (time && typeof time !== 'number' && !(time instanceof Date)) {
       if (typeof time === 'string' && isFullISOString(time)) {
-        const {date, picos} = parseISOStringInternal(time);
-        this.setTime(date.getTime());
-        this.setPicoseconds(picos);
+        const pd = parseFullISO(time as string);
+        this.setFullTime(pd.getFullTimeString());
+        this.setPicoseconds(pd.getPicoseconds());
         return;
       }
-
       this.setFullTime(PreciseDate.parseFull(time));
       return;
     }
@@ -532,7 +531,9 @@ export class PreciseDate extends Date {
       date.setTime(seconds * 1000);
       date.setNanoseconds(nanos);
     } else if (isFullISOString(time)) {
-      date.setFullTime(parseFullISO(time as string));
+      const pd = parseFullISO(time as string);
+      date.setFullTime(pd.getFullTimeString());
+      date.setPicoseconds(pd.getPicoseconds());
     } else {
       date.setTime(new Date(time as string).getTime());
     }
@@ -602,22 +603,14 @@ export class PreciseDate extends Date {
 
 /**
  * Parses a RFC 3339 formatted string representation of the date, and returns
- * a string representing the nanoseconds since January 1, 1970, 00:00:00.
+ * a {@link PreciseDate} object.
  *
  * @private
  *
  * @param {string} time The RFC 3339 formatted string.
- * @returns {string}
+ * @returns {PreciseDate}
  */
-function parseFullISO(time: string): string {
-  const {date, picos} = parseISOStringInternal(time);
-  return date.setPicoseconds(picos);
-}
-
-function parseISOStringInternal(time: string): {
-  date: PreciseDate;
-  picos: number;
-} {
+function parseFullISO(time: string): PreciseDate {
   let digits = '0';
 
   time = time.replace(/\.(\d+)/, ($0, $1) => {
@@ -628,7 +621,9 @@ function parseISOStringInternal(time: string): {
   const picos = Number(padRight(digits, 12));
   const date = new PreciseDate(time);
 
-  return {date, picos};
+  date.setPicoseconds(picos);
+
+  return date;
 }
 
 /**

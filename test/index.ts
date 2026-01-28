@@ -76,6 +76,7 @@ describe('PreciseDate', () => {
   const MILLISECONDS = 381;
   const MICROSECONDS = 101;
   const NANOSECONDS = 32;
+  const PICOSECONDS = 123;
 
   before(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -149,9 +150,9 @@ describe('PreciseDate', () => {
         MILLISECONDS,
         MICROSECONDS,
         NANOSECONDS,
-        123,
+        PICOSECONDS,
       );
-      assert.strictEqual(date.getPicoseconds(), 123);
+      assert.strictEqual(date.getPicoseconds(), PICOSECONDS);
       assert.strictEqual(date.getNanoseconds(), NANOSECONDS);
       assert.strictEqual(date.getMicroseconds(), MICROSECONDS);
       assert.strictEqual(date.getUTCMilliseconds(), MILLISECONDS);
@@ -226,8 +227,8 @@ describe('PreciseDate', () => {
   describe('#getPicoseconds()', () => {
     it('should return the picoseconds', () => {
       const date = new PreciseDate(TIME_STRING);
-      date.setPicoseconds(123);
-      assert.strictEqual(date.getPicoseconds(), 123);
+      date.setPicoseconds(PICOSECONDS);
+      assert.strictEqual(date.getPicoseconds(), PICOSECONDS);
     });
   });
 
