@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/precise-date?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/nodejs-precise-date/compare/v5.0.0...v5.1.0) (2026-01-29)
+
+
+### Features
+
+* Add picosecond support ([#302](https://github.com/googleapis/nodejs-precise-date/issues/302)) ([f767b52](https://github.com/googleapis/nodejs-precise-date/commit/f767b52793076c588d1a1a941cc5f189ca52d7f9))
+
 ## [5.0.0](https://github.com/googleapis/nodejs-precise-date/compare/v4.0.0...v5.0.0) (2025-03-03)
 
 
