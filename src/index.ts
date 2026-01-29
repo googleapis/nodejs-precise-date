@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const FULL_ISO_REG = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d{4,9}Z/;
+const FULL_ISO_REG = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d{4,12}Z/;
 const NO_BIG_INT =
   'BigInt only available in Node >= v10.7. Consider using getFullTimeString instead.';
 
@@ -101,6 +101,7 @@ enum Sign {
 export class PreciseDate extends Date {
   private _micros = 0;
   private _nanos = 0;
+  private _picos = 0;
   constructor(time?: number | Date);
   constructor(preciseTime: string | bigint | DateTuple | ProtobufDate);
   constructor(
@@ -113,6 +114,7 @@ export class PreciseDate extends Date {
     milliseconds?: number,
     microseconds?: number,
     nanoseconds?: number,
+    picoseconds?: number,
   );
   constructor(
     time?: number | string | bigint | Date | DateTuple | ProtobufDate,
@@ -120,6 +122,12 @@ export class PreciseDate extends Date {
     super();
 
     if (time && typeof time !== 'number' && !(time instanceof Date)) {
+      if (typeof time === 'string' && isFullISOString(time)) {
+        const pd = parseFullISO(time as string);
+        this.setFullTime(pd.getFullTimeString());
+        this.setPicoseconds(pd.getPicoseconds());
+        return;
+      }
       this.setFullTime(PreciseDate.parseFull(time));
       return;
     }
@@ -128,12 +136,17 @@ export class PreciseDate extends Date {
     const args: number[] = Array.from(arguments);
     const dateFields = args.slice(0, 7) as DateFields;
     const date = new Date(...dateFields);
+    const picos = args.length === 10 ? args.pop()! : 0;
     const nanos = args.length === 9 ? args.pop()! : 0;
     const micros = args.length === 8 ? args.pop()! : 0;
 
     this.setTime(date.getTime());
     this.setMicroseconds(micros);
     this.setNanoseconds(nanos);
+
+    if (picos !== 0) {
+      this.setPicoseconds(picos);
+    }
   }
   /**
    * Returns the specified date represented in nanoseconds according to
@@ -211,6 +224,20 @@ export class PreciseDate extends Date {
     return this._nanos;
   }
   /**
+   * Returns the picoseconds in the specified date according to universal time.
+   *
+   * @returns {number}
+   *
+   * @example
+   * const date = new PreciseDate('2019-02-08T10:34:29.481145231123Z');
+   *
+   * console.log(date.getPicoseconds());
+   * // expected output: 123
+   */
+  getPicoseconds(): number {
+    return this._picos;
+  }
+  /**
    * Sets the microseconds for a specified date according to universal time.
    *
    * @param {number} microseconds A number representing the microseconds.
@@ -278,6 +305,39 @@ export class PreciseDate extends Date {
     return this.setMicroseconds(micros);
   }
   /**
+   * Sets the picoseconds for a specified date according to universal time.
+   *
+   * @param {number} picoseconds A number representing the picoseconds.
+   * @returns {string} Returns a string representing the nanoseconds in the
+   *     specified date according to universal time.
+   *
+   * @example
+   * const date = new PreciseDate();
+   *
+   * date.setPicoseconds(123);
+   *
+   * console.log(date.getPicoseconds());
+   * // expected output: 123
+   */
+  setPicoseconds(picos: number): string {
+    const abs = Math.abs(picos);
+    let nanos = this._nanos;
+
+    if (abs >= 1000) {
+      nanos += Math.floor(abs / 1000) * Math.sign(picos);
+      picos %= 1000;
+    }
+
+    if (Math.sign(picos) === Sign.NEGATIVE) {
+      nanos -= 1;
+      picos += 1000;
+    }
+
+    this._picos = picos;
+
+    return this.setNanoseconds(nanos);
+  }
+  /**
    * Sets the PreciseDate object to the time represented by a number of
    * nanoseconds since January 1, 1970, 00:00:00 UTC.
    *
@@ -327,6 +387,7 @@ export class PreciseDate extends Date {
   setTime(time: number): number {
     this._micros = 0;
     this._nanos = 0;
+    this._picos = 0;
     return super.setTime(time);
   }
   /**
@@ -346,7 +407,15 @@ export class PreciseDate extends Date {
   toISOString(): string {
     const micros = padLeft(this._micros, 3);
     const nanos = padLeft(this._nanos, 3);
-    return super.toISOString().replace(/z$/i, `${micros}${nanos}Z`);
+    let picos = '';
+
+    if (this._picos > 0) {
+      // only include picoseconds if they are non-zero to avoid
+      // breaking existing consumers of this method.
+      picos = padLeft(this._picos, 3);
+    }
+
+    return super.toISOString().replace(/z$/i, `${micros}${nanos}${picos}Z`);
   }
   /**
    * Returns an object representing the specified date according to universal
@@ -464,7 +533,9 @@ export class PreciseDate extends Date {
       date.setTime(seconds * 1000);
       date.setNanoseconds(nanos);
     } else if (isFullISOString(time)) {
-      date.setFullTime(parseFullISO(time as string));
+      const pd = parseFullISO(time as string);
+      date.setFullTime(pd.getFullTimeString());
+      date.setPicoseconds(pd.getPicoseconds());
     } else {
       date.setTime(new Date(time as string).getTime());
     }
@@ -516,6 +587,10 @@ export class PreciseDate extends Date {
     const milliseconds = Date.UTC(...(args.slice(0, 7) as DateFields));
     const date = new PreciseDate(milliseconds);
 
+    if (args.length === 10) {
+      date.setPicoseconds(args.pop()!);
+    }
+
     if (args.length === 9) {
       date.setNanoseconds(args.pop()!);
     }
@@ -530,14 +605,14 @@ export class PreciseDate extends Date {
 
 /**
  * Parses a RFC 3339 formatted string representation of the date, and returns
- * a string representing the nanoseconds since January 1, 1970, 00:00:00.
+ * a {@link PreciseDate} object.
  *
  * @private
  *
  * @param {string} time The RFC 3339 formatted string.
- * @returns {string}
+ * @returns {PreciseDate}
  */
-function parseFullISO(time: string): string {
+function parseFullISO(time: string): PreciseDate {
   let digits = '0';
 
   time = time.replace(/\.(\d+)/, ($0, $1) => {
@@ -545,10 +620,12 @@ function parseFullISO(time: string): string {
     return '.000';
   });
 
-  const nanos = Number(padRight(digits, 9));
+  const picos = Number(padRight(digits, 12));
   const date = new PreciseDate(time);
 
-  return date.setNanoseconds(nanos);
+  date.setPicoseconds(picos);
+
+  return date;
 }
 
 /**
